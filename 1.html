@@ -1,0 +1,2014 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AHGK — Колледждің Ақпараттық Білім Беру Ортасы</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --ink: #0b0d11;
+  --paper: #f5f3ef;
+  --cream: #eeeae2;
+  --teal: #1a7a6e;
+  --teal-light: #23a898;
+  --teal-pale: #e8f5f3;
+  --text: #1c1e24;
+  --sub: #6b7180;
+  --border: #dbd8d0;
+  --white: #ffffff;
+  --shadow: 0 4px 24px rgba(11,13,17,0.08);
+  --shadow-lg: 0 12px 48px rgba(11,13,17,0.12);
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--paper);
+  color: var(--text);
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 400;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* NAV */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 48px;
+  height: 68px;
+  background: rgba(245,243,239,0.88);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border);
+}
+
+.nav-logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+}
+
+.nav-logo-mark {
+  width: 36px; height: 36px;
+  background: var(--teal);
+  border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  color: #fff;
+  font-family: 'DM Serif Display', serif;
+  font-size: 16px;
+}
+
+.nav-logo-text {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  list-style: none;
+}
+
+.nav-links a {
+  color: var(--sub);
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+  padding: 8px 16px;
+  border-radius: 8px;
+  transition: all 0.2s;
+}
+
+.nav-links a:hover { color: var(--teal); background: var(--teal-pale); }
+
+.nav-cta {
+  background: var(--teal) !important;
+  color: #fff !important;
+  border-radius: 10px !important;
+}
+
+.nav-cta:hover { background: var(--teal-light) !important; }
+
+/* HERO */
+.hero {
+  padding: 160px 48px 120px;
+  max-width: 1240px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: center;
+}
+
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--teal-pale);
+  border: 1px solid rgba(26,122,110,0.2);
+  color: var(--teal);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  padding: 6px 14px;
+  border-radius: 20px;
+  margin-bottom: 28px;
+  opacity: 0;
+  animation: slideIn 0.6s 0.1s forwards;
+}
+
+.hero-badge::before {
+  content: '';
+  width: 6px; height: 6px;
+  background: var(--teal);
+  border-radius: 50%;
+}
+
+.hero h1 {
+  font-family: 'DM Serif Display', serif;
+  font-size: clamp(2.6rem, 4vw, 4rem);
+  line-height: 1.1;
+  letter-spacing: -1px;
+  color: var(--ink);
+  margin-bottom: 24px;
+  opacity: 0;
+  animation: slideIn 0.6s 0.2s forwards;
+}
+
+.hero h1 em { font-style: italic; color: var(--teal); }
+
+.hero-desc {
+  font-size: 1.05rem;
+  color: var(--sub);
+  line-height: 1.75;
+  margin-bottom: 40px;
+  max-width: 440px;
+  opacity: 0;
+  animation: slideIn 0.6s 0.3s forwards;
+}
+
+.hero-actions {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+  opacity: 0;
+  animation: slideIn 0.6s 0.4s forwards;
+}
+
+.btn-primary {
+  background: var(--teal);
+  color: #fff;
+  padding: 14px 28px;
+  border-radius: 12px;
+  font-size: 15px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.25s;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.btn-primary:hover {
+  background: var(--teal-light);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(26,122,110,0.3);
+}
+
+.btn-secondary {
+  background: transparent;
+  color: var(--text);
+  padding: 14px 28px;
+  border-radius: 12px;
+  font-size: 15px;
+  font-weight: 500;
+  text-decoration: none;
+  border: 1.5px solid var(--border);
+  transition: all 0.25s;
+}
+
+.btn-secondary:hover {
+  border-color: var(--teal);
+  color: var(--teal);
+  background: var(--teal-pale);
+}
+
+/* Hero visual */
+.hero-visual {
+  opacity: 0;
+  animation: slideInRight 0.8s 0.3s forwards;
+}
+
+.dashboard-card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow: var(--shadow-lg);
+}
+
+.dash-topbar {
+  background: var(--ink);
+  padding: 14px 20px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.dash-dots {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.dash-dot {
+  width: 13px; height: 13px;
+  border-radius: 50%;
+  cursor: pointer;
+  position: relative;
+  flex-shrink: 0;
+  transition: filter 0.15s, transform 0.15s;
+  display: flex; align-items: center; justify-content: center;
+}
+
+.dash-dot:hover { filter: brightness(1.15); transform: scale(1.12); }
+.dash-dot:active { transform: scale(0.92); }
+
+.dash-dot::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  opacity: 0;
+  transition: opacity 0.15s;
+  background-size: 7px 7px;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.dash-dot:hover::after { opacity: 1; }
+
+/* Red — ✕ */
+.dash-dot:nth-child(1) {
+  background: #ff5f57;
+  box-shadow: inset 0 0 0 0.5px rgba(0,0,0,0.18);
+}
+.dash-dot:nth-child(1)::after {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'%3E%3Cpath d='M1.5 1.5l5 5M6.5 1.5l-5 5' stroke='%23820005' stroke-width='1.3' stroke-linecap='round'/%3E%3C/svg%3E");
+}
+
+/* Yellow — – */
+.dash-dot:nth-child(2) {
+  background: #ffbd2e;
+  box-shadow: inset 0 0 0 0.5px rgba(0,0,0,0.15);
+}
+.dash-dot:nth-child(2)::after {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'%3E%3Cpath d='M1.5 4h5' stroke='%237d5200' stroke-width='1.3' stroke-linecap='round'/%3E%3C/svg%3E");
+}
+
+/* Green — ⤢ */
+.dash-dot:nth-child(3) {
+  background: #28ca40;
+  box-shadow: inset 0 0 0 0.5px rgba(0,0,0,0.15);
+}
+.dash-dot:nth-child(3)::after {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'%3E%3Cpath d='M1 7l2.5-2.5M7 1L4.5 3.5M5 1h2v2M3 7H1V5' stroke='%230f6520' stroke-width='1.2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+}
+
+.dash-title {
+  margin-left: auto;
+  margin-right: auto;
+  font-size: 12px;
+  color: rgba(255,255,255,0.4);
+  font-weight: 500;
+}
+
+.dash-body { padding: 24px; }
+
+.dash-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.dash-stat {
+  background: var(--paper);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 16px;
+  text-align: center;
+}
+
+.dash-stat .val {
+  font-family: 'DM Serif Display', serif;
+  font-size: 1.8rem;
+  color: var(--ink);
+  line-height: 1;
+  margin-bottom: 4px;
+}
+
+.dash-stat .lbl {
+  font-size: 11px;
+  color: var(--sub);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.dash-rows { display: flex; flex-direction: column; gap: 10px; }
+
+.dash-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: var(--paper);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 12px 16px;
+}
+
+.dash-row-icon {
+  width: 36px; height: 36px;
+  border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 16px;
+  flex-shrink: 0;
+}
+
+.icon-blue { background: #dbeafe; }
+.icon-green { background: #dcfce7; }
+.icon-amber { background: #fef9c3; }
+
+.dash-row-info { flex: 1; }
+.dash-row-info .row-title { font-size: 13px; font-weight: 600; color: var(--text); }
+.dash-row-info .row-sub { font-size: 12px; color: var(--sub); }
+
+.dash-row-badge {
+  font-size: 11px;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: 20px;
+}
+
+.badge-green { background: #dcfce7; color: #16a34a; }
+.badge-blue { background: #dbeafe; color: #1d4ed8; }
+.badge-amber { background: #fef9c3; color: #b45309; }
+
+/* STATS BAR */
+.stats-bar {
+  background: var(--ink);
+  padding: 40px 48px;
+}
+
+.stats-inner {
+  max-width: 1240px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1px;
+  background: rgba(255,255,255,0.08);
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+.stat-cell {
+  background: var(--ink);
+  padding: 32px 28px;
+  text-align: center;
+  transition: background 0.2s;
+}
+
+.stat-cell:hover { background: #15181f; }
+
+.stat-num {
+  font-family: 'DM Serif Display', serif;
+  font-size: 2.6rem;
+  color: var(--white);
+  line-height: 1;
+  margin-bottom: 8px;
+}
+
+.stat-num span { color: var(--teal-light); }
+.stat-label { font-size: 13px; color: rgba(255,255,255,0.45); font-weight: 500; }
+
+/* SECTIONS */
+.container {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 0 48px;
+}
+
+.section {
+  padding: 100px 0;
+  opacity: 0;
+  transform: translateY(32px);
+  transition: opacity 0.7s, transform 0.7s;
+}
+
+.section.visible { opacity: 1; transform: none; }
+
+.section-eyebrow {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--teal);
+  margin-bottom: 14px;
+}
+
+.section-title {
+  font-family: 'DM Serif Display', serif;
+  font-size: clamp(1.9rem, 3.2vw, 2.8rem);
+  line-height: 1.15;
+  color: var(--ink);
+  letter-spacing: -0.5px;
+  margin-bottom: 16px;
+}
+
+.section-desc {
+  font-size: 1.05rem;
+  color: var(--sub);
+  max-width: 520px;
+  line-height: 1.75;
+  margin-bottom: 56px;
+}
+
+/* DEFINITION */
+.def-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.def-card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 32px 28px;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s;
+}
+
+.def-card::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--teal), var(--teal-light));
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.35s;
+}
+
+.def-card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-lg);
+  border-color: transparent;
+}
+
+.def-card:hover::after { transform: scaleX(1); }
+
+.def-num {
+  font-family: 'DM Serif Display', serif;
+  font-size: 3.5rem;
+  color: var(--cream);
+  line-height: 1;
+  margin-bottom: 16px;
+  font-style: italic;
+}
+
+.def-card h3 {
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--ink);
+  margin-bottom: 10px;
+}
+
+.def-card p { font-size: 0.9rem; color: var(--sub); line-height: 1.7; }
+
+/* ROLES */
+.bento {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.bento-card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 22px;
+  padding: 36px 32px;
+  transition: all 0.3s;
+}
+
+.bento-card:hover {
+  box-shadow: var(--shadow-lg);
+  transform: translateY(-4px);
+}
+
+.bento-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 28px;
+}
+
+.role-emoji-bg {
+  width: 56px; height: 56px;
+  border-radius: 16px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 26px;
+}
+
+.bg-blue { background: #dbeafe; }
+.bg-green { background: #d1fae5; }
+.bg-teal { background: var(--teal-pale); }
+
+.role-tag {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  padding: 5px 12px;
+  border-radius: 20px;
+}
+
+.tag-blue { background: #dbeafe; color: #1d4ed8; }
+.tag-green { background: #d1fae5; color: #059669; }
+.tag-teal { background: var(--teal-pale); color: var(--teal); }
+
+.bento-card h3 {
+  font-family: 'DM Serif Display', serif;
+  font-size: 1.5rem;
+  color: var(--ink);
+  margin-bottom: 20px;
+  letter-spacing: -0.3px;
+}
+
+.task-list { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+
+.task-list li {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 0.9rem;
+  color: var(--text);
+  padding: 10px 14px;
+  background: var(--paper);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  transition: all 0.2s;
+}
+
+.task-list li:hover {
+  border-color: var(--teal);
+  background: var(--teal-pale);
+  color: var(--teal);
+}
+
+/* TECH */
+.tech-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.tech-big {
+  background: var(--ink);
+  border-radius: 22px;
+  padding: 48px 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  min-height: 340px;
+  position: relative;
+  overflow: hidden;
+}
+
+.tech-big::before {
+  content: '';
+  position: absolute;
+  top: -60px; right: -60px;
+  width: 240px; height: 240px;
+  background: radial-gradient(circle, rgba(26,122,110,0.3), transparent 70%);
+  pointer-events: none;
+}
+
+.tech-big-icon { font-size: 44px; margin-bottom: auto; padding-top: 8px; }
+
+.tech-big h3 {
+  font-family: 'DM Serif Display', serif;
+  font-size: 1.8rem;
+  color: var(--white);
+  letter-spacing: -0.4px;
+  margin-bottom: 12px;
+}
+
+.tech-big p { font-size: 0.95rem; color: rgba(255,255,255,0.5); line-height: 1.7; }
+
+.tech-smalls { display: flex; flex-direction: column; gap: 20px; }
+
+.tech-small {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 22px;
+  padding: 28px 32px;
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  flex: 1;
+  transition: all 0.3s;
+}
+
+.tech-small:hover {
+  box-shadow: var(--shadow);
+  border-color: var(--teal);
+  transform: translateX(4px);
+}
+
+.tech-small-icon {
+  width: 52px; height: 52px;
+  border-radius: 14px;
+  background: var(--teal-pale);
+  border: 1px solid rgba(26,122,110,0.15);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 22px;
+  flex-shrink: 0;
+}
+
+.tech-small h4 { font-size: 1rem; font-weight: 600; color: var(--ink); margin-bottom: 4px; }
+.tech-small p { font-size: 0.85rem; color: var(--sub); line-height: 1.55; }
+
+/* PLATONUS */
+.platonus-section {
+  background: var(--ink);
+  padding: 80px 48px;
+}
+
+.platonus-inner {
+  max-width: 1240px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: center;
+}
+
+.platonus-inner .section-eyebrow { color: var(--teal-light); }
+.platonus-inner .section-title { color: var(--white); }
+.platonus-inner .section-desc { color: rgba(255,255,255,0.5); margin-bottom: 36px; }
+
+.platonus-chips { display: flex; flex-wrap: wrap; gap: 10px; }
+
+.chip {
+  background: rgba(255,255,255,0.07);
+  border: 1px solid rgba(255,255,255,0.1);
+  color: rgba(255,255,255,0.7);
+  padding: 8px 18px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 500;
+  transition: all 0.2s;
+}
+
+.chip:hover {
+  background: rgba(26,122,110,0.25);
+  border-color: var(--teal-light);
+  color: var(--teal-light);
+}
+
+.platonus-screen {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 24px;
+  overflow: hidden;
+}
+
+.ps-bar {
+  background: rgba(255,255,255,0.07);
+  padding: 14px 20px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border-bottom: 1px solid rgba(255,255,255,0.07);
+}
+
+.ps-dot { width: 8px; height: 8px; border-radius: 50%; }
+.ps-d1 { background: rgba(255,95,87,0.6); }
+.ps-d2 { background: rgba(255,189,46,0.6); }
+.ps-d3 { background: rgba(40,202,64,0.6); }
+
+.ps-url {
+  margin: 0 auto;
+  background: rgba(255,255,255,0.07);
+  border-radius: 6px;
+  padding: 4px 16px;
+  font-size: 12px;
+  color: rgba(255,255,255,0.4);
+  font-weight: 500;
+}
+
+.ps-body { padding: 24px; display: flex; flex-direction: column; gap: 12px; }
+
+.ps-row {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 12px;
+  padding: 14px 18px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.ps-avatar {
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--teal), var(--teal-light));
+  display: flex; align-items: center; justify-content: center;
+  font-size: 14px;
+  font-weight: 700;
+  color: #fff;
+  flex-shrink: 0;
+}
+
+.ps-info { flex: 1; }
+.ps-name { font-size: 13px; font-weight: 600; color: rgba(255,255,255,0.85); }
+.ps-detail { font-size: 11px; color: rgba(255,255,255,0.35); }
+.ps-score { font-size: 13px; font-weight: 700; color: var(--teal-light); }
+
+/* BENEFITS */
+.benefits-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: center;
+}
+
+.benefits-cards {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.benefit-card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  padding: 24px 20px;
+  transition: all 0.3s;
+}
+
+.benefit-card:hover {
+  border-color: var(--teal);
+  background: var(--teal-pale);
+  transform: scale(1.03);
+}
+
+.benefit-icon { font-size: 28px; margin-bottom: 12px; }
+
+.benefit-card h4 {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--ink);
+  line-height: 1.4;
+}
+
+.benefit-large {
+  grid-column: span 2;
+  background: var(--teal);
+  border-color: var(--teal);
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.benefit-large:hover { background: var(--teal-light); border-color: var(--teal-light); }
+.benefit-large .benefit-icon { margin: 0; font-size: 32px; }
+.benefit-large h4 { color: #fff; font-size: 1rem; }
+
+/* FOOTER */
+footer {
+  background: var(--ink);
+  border-top: 1px solid rgba(255,255,255,0.07);
+  padding: 48px;
+}
+
+.footer-inner {
+  max-width: 1240px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 24px;
+}
+
+.footer-brand {
+  display: flex; align-items: center; gap: 12px;
+  text-decoration: none;
+}
+
+.footer-brand-mark {
+  width: 40px; height: 40px;
+  background: var(--teal);
+  border-radius: 12px;
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'DM Serif Display', serif;
+  font-size: 17px;
+  color: #fff;
+}
+
+.footer-brand-name { font-size: 14px; font-weight: 600; color: rgba(255,255,255,0.85); }
+.footer-brand-sub { font-size: 12px; color: rgba(255,255,255,0.3); }
+
+.footer-links { display: flex; gap: 32px; }
+
+.footer-links a {
+  color: rgba(255,255,255,0.35);
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+
+.footer-links a:hover { color: var(--teal-light); }
+
+.footer-copy {
+  font-size: 12px;
+  color: rgba(255,255,255,0.2);
+  text-align: center;
+  max-width: 1240px;
+  margin: 24px auto 0;
+  padding-top: 24px;
+  border-top: 1px solid rgba(255,255,255,0.07);
+}
+
+.nav-links a.nav-active {
+  color: var(--teal);
+  background: var(--teal-pale);
+}
+
+/* Hero ambient glow follows cursor */
+.hero {
+  position: relative;
+}
+.hero::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle 400px at var(--mx, 30%) var(--my, 50%), rgba(26,122,110,0.07), transparent 70%);
+  pointer-events: none;
+  transition: background 0.1s;
+}
+
+/* ── ANIME.JS INIT STATES ── */
+.def-card, .bento-card, .benefit-card, .tech-big, .tech-small, .ps-row, .chip,
+.platonus-inner > div {
+  opacity: 0;
+}
+
+.def-card, .bento-card, .tech-small, .benefit-card, .dashboard-card {
+  transform-style: preserve-3d;
+  perspective: 800px;
+}
+
+/* ── OVERLAY hidden initially ── */
+body { overflow-x: hidden; }
+
+.divider {
+  max-width: 1240px;
+  margin: 0 auto;
+  height: 1px;
+  background: var(--border);
+}
+
+/* ── PROFESSIONAL ANIMATIONS ── */
+
+/* Legacy aliases used by hero elements */
+@keyframes slideIn {
+  0%   { opacity: 0; transform: translateY(28px); filter: blur(3px); }
+  100% { opacity: 1; transform: translateY(0);    filter: blur(0); }
+}
+
+@keyframes slideInRight {
+  0%   { opacity: 0; transform: translateX(40px) scale(0.97); }
+  100% { opacity: 1; transform: translateX(0)    scale(1); }
+}
+
+/* Page load — hero elements */
+@keyframes heroFadeUp {
+  0%   { opacity: 0; transform: translateY(28px); filter: blur(4px); }
+  100% { opacity: 1; transform: translateY(0);    filter: blur(0); }
+}
+
+@keyframes heroSlideRight {
+  0%   { opacity: 0; transform: translateX(40px) scale(0.97); }
+  100% { opacity: 1; transform: translateX(0)    scale(1); }
+}
+
+@keyframes navSlideDown {
+  0%   { opacity: 0; transform: translateY(-100%); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+/* Scroll reveal */
+@keyframes revealUp {
+  0%   { opacity: 0; transform: translateY(36px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes revealScale {
+  0%   { opacity: 0; transform: scale(0.94) translateY(20px); }
+  100% { opacity: 1; transform: scale(1)    translateY(0); }
+}
+
+/* Counter number pulse on appear */
+@keyframes numPop {
+  0%   { transform: scale(0.7); opacity: 0; }
+  60%  { transform: scale(1.08); opacity: 1; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+/* Shimmer on stat cells */
+@keyframes shimmer {
+  0%   { background-position: -400px 0; }
+  100% { background-position: 400px 0; }
+}
+
+/* Floating badge pulse */
+@keyframes badgePulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(26,122,110,0.25); }
+  50%       { box-shadow: 0 0 0 8px rgba(26,122,110,0); }
+}
+
+/* Nav line underline sweep */
+@keyframes underlineSweep {
+  from { transform: scaleX(0); }
+  to   { transform: scaleX(1); }
+}
+
+/* Apply nav animation */
+nav {
+  animation: navSlideDown 0.5s cubic-bezier(0.16,1,0.3,1) both;
+}
+
+/* Hero re-assignments with better easing */
+.hero-badge {
+  animation: heroFadeUp 0.7s cubic-bezier(0.16,1,0.3,1) 0.1s both;
+  animation-name: heroFadeUp;
+}
+.hero-badge { animation-name: heroFadeUp; }
+
+/* Badge dot pulse */
+.hero-badge::before {
+  animation: badgePulse 2.4s ease-in-out 1.2s infinite;
+}
+
+/* Nav link underline on hover */
+.nav-links a {
+  position: relative;
+}
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: 4px; left: 16px; right: 16px;
+  height: 1.5px;
+  background: var(--teal);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.25s cubic-bezier(0.16,1,0.3,1);
+}
+.nav-links a:hover::after {
+  animation: underlineSweep 0.25s cubic-bezier(0.16,1,0.3,1) forwards;
+  transform: scaleX(1);
+}
+
+/* Dashboard card entrance */
+.hero-visual {
+  animation: heroSlideRight 0.8s cubic-bezier(0.16,1,0.3,1) 0.35s both;
+}
+
+/* Stat cells stagger */
+.stat-cell:nth-child(1) { animation: numPop 0.6s cubic-bezier(0.34,1.56,0.64,1) 0.1s both; }
+.stat-cell:nth-child(2) { animation: numPop 0.6s cubic-bezier(0.34,1.56,0.64,1) 0.22s both; }
+.stat-cell:nth-child(3) { animation: numPop 0.6s cubic-bezier(0.34,1.56,0.64,1) 0.34s both; }
+.stat-cell:nth-child(4) { animation: numPop 0.6s cubic-bezier(0.34,1.56,0.64,1) 0.46s both; }
+
+/* Scroll reveal — sections */
+.section {
+  opacity: 0;
+  transform: translateY(36px);
+  transition: opacity 0.75s cubic-bezier(0.16,1,0.3,1),
+              transform 0.75s cubic-bezier(0.16,1,0.3,1);
+}
+.section.visible { opacity: 1; transform: translateY(0); }
+
+/* Cards stagger inside visible sections */
+.section.visible .def-card:nth-child(1) { animation: revealScale 0.6s cubic-bezier(0.16,1,0.3,1) 0.05s both; }
+.section.visible .def-card:nth-child(2) { animation: revealScale 0.6s cubic-bezier(0.16,1,0.3,1) 0.15s both; }
+.section.visible .def-card:nth-child(3) { animation: revealScale 0.6s cubic-bezier(0.16,1,0.3,1) 0.25s both; }
+
+.section.visible .bento-card:nth-child(1) { animation: revealScale 0.6s cubic-bezier(0.16,1,0.3,1) 0.05s both; }
+.section.visible .bento-card:nth-child(2) { animation: revealScale 0.6s cubic-bezier(0.16,1,0.3,1) 0.18s both; }
+.section.visible .bento-card:nth-child(3) { animation: revealScale 0.6s cubic-bezier(0.16,1,0.3,1) 0.31s both; }
+
+.section.visible .benefit-card { animation: revealUp 0.5s cubic-bezier(0.16,1,0.3,1) both; }
+.section.visible .benefit-card:nth-child(1) { animation-delay: 0.05s; }
+.section.visible .benefit-card:nth-child(2) { animation-delay: 0.12s; }
+.section.visible .benefit-card:nth-child(3) { animation-delay: 0.19s; }
+.section.visible .benefit-card:nth-child(4) { animation-delay: 0.26s; }
+.section.visible .benefit-card:nth-child(5) { animation-delay: 0.33s; }
+
+/* Tech cards */
+.section.visible .tech-big   { animation: revealScale 0.65s cubic-bezier(0.16,1,0.3,1) 0.05s both; }
+.section.visible .tech-small:nth-child(1) { animation: revealUp 0.55s cubic-bezier(0.16,1,0.3,1) 0.18s both; }
+.section.visible .tech-small:nth-child(2) { animation: revealUp 0.55s cubic-bezier(0.16,1,0.3,1) 0.3s both; }
+
+/* Platonus rows stagger */
+.ps-row { transition: transform 0.2s, background 0.2s; }
+.ps-row:hover { transform: translateX(4px); background: rgba(255,255,255,0.07); }
+
+/* Chip hover lift */
+.chip { transition: all 0.2s cubic-bezier(0.16,1,0.3,1); }
+.chip:hover { transform: translateY(-2px); }
+
+/* Task list item micro */
+.task-list li { transition: all 0.2s cubic-bezier(0.16,1,0.3,1); }
+
+/* Divider animated reveal */
+.divider {
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.9s cubic-bezier(0.16,1,0.3,1);
+}
+.divider.visible { transform: scaleX(1); }
+
+/* ── TABLET ── */
+@media (max-width: 1024px) {
+  nav { padding: 0 24px; }
+  .hero { padding: 140px 32px 80px; gap: 48px; }
+  .container { padding: 0 32px; }
+  .section { padding: 72px 0; }
+  .platonus-inner { gap: 48px; }
+  .benefits-layout { gap: 40px; }
+}
+
+/* ── SMALL TABLET ── */
+@media (max-width: 860px) {
+  nav { padding: 0 20px; }
+  .nav-links { display: none; }
+  .hero { grid-template-columns: 1fr; padding: 110px 20px 60px; gap: 0; }
+  .hero-visual { display: none; }
+  .hero h1 { font-size: 2.4rem; }
+  .stats-inner { grid-template-columns: 1fr 1fr; border-radius: 16px; }
+  .stats-bar { padding: 28px 20px; }
+  .container { padding: 0 20px; }
+  .section { padding: 60px 0; }
+  .section-title { font-size: 1.8rem; }
+  .section-desc { font-size: 0.95rem; margin-bottom: 36px; }
+  .def-grid { grid-template-columns: 1fr; gap: 14px; }
+  .bento { grid-template-columns: 1fr; gap: 14px; }
+  .tech-layout { grid-template-columns: 1fr; }
+  .tech-big { min-height: 260px; padding: 32px 28px; }
+  .benefits-layout { grid-template-columns: 1fr; gap: 36px; }
+  .platonus-inner { grid-template-columns: 1fr; gap: 36px; }
+  .platonus-section { padding: 60px 20px; }
+  footer { padding: 40px 20px; }
+  .footer-links { display: none; }
+}
+
+/* ── MOBILE ── */
+@media (max-width: 600px) {
+  nav { padding: 0 16px; height: 60px; }
+  .nav-logo-text { font-size: 13px; }
+  .hero { padding: 96px 16px 48px; }
+  .hero-badge { font-size: 11px; padding: 5px 12px; }
+  .hero h1 { font-size: 2rem; letter-spacing: -0.5px; margin-bottom: 16px; }
+  .hero-desc { font-size: 0.95rem; margin-bottom: 28px; }
+  .hero-actions { gap: 10px; }
+  .btn-primary, .btn-secondary { padding: 12px 22px; font-size: 14px; }
+  .stats-inner { grid-template-columns: 1fr 1fr; border-radius: 12px; }
+  .stat-cell { padding: 22px 16px; }
+  .stat-num { font-size: 2rem; }
+  .stat-label { font-size: 11px; }
+  .stats-bar { padding: 20px 16px; }
+  .container { padding: 0 16px; }
+  .section { padding: 48px 0; }
+  .section-eyebrow { font-size: 11px; }
+  .section-title { font-size: 1.6rem; letter-spacing: -0.3px; }
+  .section-desc { font-size: 0.9rem; margin-bottom: 28px; }
+  .def-card { padding: 24px 20px; border-radius: 16px; }
+  .def-num { font-size: 2.8rem; margin-bottom: 10px; }
+  .def-card h3 { font-size: 0.95rem; }
+  .bento-card { padding: 24px 20px; border-radius: 18px; }
+  .role-emoji-bg { width: 46px; height: 46px; font-size: 22px; border-radius: 13px; }
+  .bento-card h3 { font-size: 1.25rem; margin-bottom: 16px; }
+  .task-list li { font-size: 0.85rem; padding: 9px 12px; }
+  .tech-big { padding: 28px 22px; min-height: 220px; border-radius: 18px; }
+  .tech-big h3 { font-size: 1.5rem; }
+  .tech-big p { font-size: 0.875rem; }
+  .tech-small { padding: 20px 20px; border-radius: 18px; gap: 14px; }
+  .tech-small-icon { width: 44px; height: 44px; font-size: 20px; border-radius: 12px; }
+  .tech-small h4 { font-size: 0.9rem; }
+  .benefits-cards { grid-template-columns: 1fr 1fr; gap: 10px; }
+  .benefit-card { padding: 18px 14px; border-radius: 14px; }
+  .benefit-icon { font-size: 22px; margin-bottom: 8px; }
+  .benefit-card h4 { font-size: 0.8rem; }
+  .benefit-large { flex-direction: column; gap: 8px; text-align: center; }
+  .benefit-large .benefit-icon { margin: 0; }
+  .platonus-section { padding: 48px 16px; }
+  .platonus-chips { gap: 8px; }
+  .chip { font-size: 12px; padding: 6px 14px; }
+  .ps-body { padding: 16px; gap: 10px; }
+  .ps-row { padding: 12px 14px; gap: 10px; border-radius: 10px; }
+  .ps-name { font-size: 12px; }
+  .ps-detail { font-size: 10px; }
+  footer { padding: 32px 16px; }
+  .footer-brand-name { font-size: 13px; }
+  .footer-copy { font-size: 11px; }
+}
+
+/* ── SMALL PHONES ── */
+@media (max-width: 380px) {
+  .hero h1 { font-size: 1.75rem; }
+  .stats-inner { grid-template-columns: 1fr 1fr; }
+  .stat-num { font-size: 1.7rem; }
+  .benefits-cards { grid-template-columns: 1fr; }
+  .section-title { font-size: 1.45rem; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#" class="nav-logo">
+    <div class="nav-logo-mark">AH</div>
+    <span class="nav-logo-text">AHGK</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#aniktama">Анықтама</a></li>
+    <li><a href="#negizgi">Модульдер</a></li>
+    <li><a href="#tech">Технология</a></li>
+    <li><a href="#paydasy">Пайдасы</a></li>
+    <li><a href="#platonus" class="nav-cta">Platonus →</a></li>
+  </ul>
+</nav>
+
+<section class="hero">
+  <div>
+    <div class="hero-badge">Цифрлық білім беру платформасы</div>
+    <h1>Колледждің <em>ақпараттық</em> білім беру ортасы</h1>
+    <p class="hero-desc">Оқу үдерісін толық автоматтандыратын, барлық қатысушыларды біріктіретін заманауи ақпараттық жүйе.</p>
+    <div class="hero-actions">
+      <a href="#negizgi" class="btn-primary">Модульдерді қарау →</a>
+      <a href="#aniktama" class="btn-secondary">Толық ақпарат</a>
+    </div>
+  </div>
+  <div class="hero-visual">
+    <div class="dashboard-card">
+      <div class="dash-topbar">
+        <div class="dash-dots">
+          <span class="dash-dot"></span>
+          <span class="dash-dot"></span>
+          <span class="dash-dot"></span>
+        </div>
+        <span class="dash-title">AHGK Dashboard</span>
+      </div>
+      <div class="dash-body">
+        <div class="dash-stats">
+          <div class="dash-stat">
+            <div class="val">2200</div>
+            <div class="lbl">Студент</div>
+          </div>
+          <div class="dash-stat">
+            <div class="val">150+</div>
+            <div class="lbl">Оқытушы</div>
+          </div>
+          <div class="dash-stat">
+            <div class="val">99.9%</div>
+            <div class="lbl">Белсенді</div>
+          </div>
+
+        </div>
+        <div class="dash-rows">
+          <div class="dash-row">
+            <div class="dash-row-icon icon-blue">📋</div>
+            <div class="dash-row-info">
+              <div class="row-title">Оқу жоспары</div>
+              <div class="row-sub">2025–2026 оқу жылы</div>
+            </div>
+            <span class="dash-row-badge badge-green">Белсенді</span>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="stats-bar">
+  <div class="stats-inner">
+    <div class="stat-cell">
+      <div class="stat-num" data-val="2200" data-suffix="+">2200+</div>
+      <div class="stat-label">Студент</div>
+    </div>
+    <div class="stat-cell">
+      <div class="stat-num" data-val="150" data-suffix="+">150+</div>
+      <div class="stat-label">Мұғалім</div>
+    </div>
+    <div class="stat-cell">
+      <div class="stat-num" data-val="24" data-suffix="/7">24/7</div>
+      <div class="stat-label">Қолжетімділік</div>
+    </div>
+    <div class="stat-cell">
+      <div class="stat-num" data-val="2025" data-suffix="–26">2025–26</div>
+      <div class="stat-label">Оқу жылы</div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <section class="section" id="aniktama">
+    <div class="section-eyebrow">Анықтама</div>
+    <h2 class="section-title">Жүйе не береді?</h2>
+    <p class="section-desc">Колледждің ақпараттық білім беру ортасы — оқу, басқару және есеп беру үдерістерін бір платформада біріктіретін жүйе.</p>
+    <div class="def-grid">
+      <div class="def-card">
+        <div class="def-num">01</div>
+        <h3>Оқу процесін компьютерлендіру</h3>
+        <p>Барлық оқу-ағарту жұмыстарын цифрлық форматқа ауыстыру. Бұл уақытты үнемдеп, ақпаратты дәл сақтауға мүмкіндік береді.</p>
+      </div>
+      <div class="def-card">
+        <div class="def-num">02</div>
+        <h3>Электронды ақпараттар базасы</h3>
+        <p>Оқушылар мен оқытушылардың деректері, бағалары, қатысымы бір орталықтандырылған дерекқорда сенімді сақталады.</p>
+      </div>
+      <div class="def-card">
+        <div class="def-num">03</div>
+        <h3>Platonus жүйесі</h3>
+        <p>Қазақстандағы оқу орындарына арналған ең танымал ақпараттық платформалардың бірі. Толық функционалды, сенімді.</p>
+      </div>
+    </div>
+  </section>
+</div>
+
+<div class="divider"></div>
+
+<div class="container">
+  <section class="section" id="paydasy">
+    <div class="benefits-layout">
+      <div>
+        <div class="section-eyebrow">Жүйенің пайдасы</div>
+        <h2 class="section-title">Неліктен цифрлық жүйе пайдалы?</h2>
+        <p class="section-desc">Ақпараттық білім беру ортасы колледждің барлық деңгейлерінде тиімділікті арттырады.</p>
+        <a href="#negizgi" class="btn-primary">Модульдерді көру →</a>
+      </div>
+      <div class="benefits-cards">
+        <div class="benefit-card benefit-large">
+          <div class="benefit-icon">📊</div>
+          <h4>Ақпараттың орталықтандырылуы — барлық деректер бір жерде</h4>
+        </div>
+        <div class="benefit-card">
+          <div class="benefit-icon">👁️</div>
+          <h4>Бағалардың ашықтығы</h4>
+        </div>
+        <div class="benefit-card">
+          <div class="benefit-icon">⏱️</div>
+          <h4>Уақытты үнемдеу</h4>
+        </div>
+        <div class="benefit-card">
+          <div class="benefit-icon">📄</div>
+          <h4>Қағазсыз жұмыс</h4>
+        </div>
+        <div class="benefit-card">
+          <div class="benefit-icon">📈</div>
+          <h4>Үлгерімді бақылау</h4>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<div class="divider"></div>
+
+<div class="container">
+  <section class="section" id="negizgi">
+    <div class="section-eyebrow">Негізгі бөліктер</div>
+    <h2 class="section-title">Үш рөл, бір жүйе</h2>
+    <p class="section-desc">Әкімшілік, оқытушы және студент — әрқайсысына арналған жеке функционал мүмкіндіктер.</p>
+    <div class="bento">
+      <div class="bento-card">
+        <div class="bento-header">
+          <div class="role-emoji-bg bg-blue">🏛️</div>
+          <span class="role-tag tag-blue">Әкімшілік</span>
+        </div>
+        <h3>Әкімшілік бөлігі</h3>
+        <ul class="task-list">
+          <li>📋 Оқу жоспарын енгізу</li>
+          <li>🗓️ Сабақ кестесін жасау</li>
+          <li>👥 Оқытушылар мен студенттерді тіркеу</li>
+          <li>📊 Бағаларды бақылау</li>
+        </ul>
+      </div>
+      <div class="bento-card">
+        <div class="bento-header">
+          <div class="role-emoji-bg bg-green">👩‍🏫</div>
+          <span class="role-tag tag-green">Педагог</span>
+        </div>
+        <h3>Оқытушы жұмысы</h3>
+        <ul class="task-list">
+          <li>✏️ Баға қою</li>
+          <li>✅ Қатысымды белгілеу</li>
+          <li>📁 Тапсырма жүктеу</li>
+        </ul>
+      </div>
+      <div class="bento-card">
+        <div class="bento-header">
+          <div class="role-emoji-bg bg-teal">🎓</div>
+          <span class="role-tag tag-teal">Студент</span>
+        </div>
+        <h3>Студент жұмысы</h3>
+        <ul class="task-list">
+          <li>📈 Үлгерімді тексеру</li>
+          <li>📅 Сабақ кестесін көру</li>
+          <li>🔔 Хабарламалар алу</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+</div>
+
+<div class="divider"></div>
+
+<div class="container">
+  <section class="section" id="tech">
+    <div class="section-eyebrow">Техникалық қамтамасыз ету</div>
+    <h2 class="section-title">Жүйе инфрақұрылымы</h2>
+    <p class="section-desc">Сенімді жұмыс жасауды қамтамасыз ететін үш негізгі техникалық компонент.</p>
+    <div class="tech-layout">
+      <div class="tech-big">
+        <div class="tech-big-icon">🖥️</div>
+        <h3>Сервер және жүйелік база</h3>
+        <p>Барлық деректерді қауіпсіз, орталықтандырылған серверде сақтайтын мәліметтер базасы. Жоғары жылдамдық пен тұрақтылық.</p>
+      </div>
+      <div class="tech-smalls">
+        <div class="tech-small">
+          <div class="tech-small-icon">🌐</div>
+          <div>
+            <h4>Интернет және компьютерлер</h4>
+            <p>Жүйеге кез келген уақытта, кез келген жерден интернет арқылы қол жеткізуге болады.</p>
+          </div>
+        </div>
+        <div class="tech-small">
+          <div class="tech-small-icon">🔐</div>
+          <div>
+            <h4>Жеке логин мен пароль</h4>
+            <p>Әр пайдаланушыға бірегей кіру деректері. Деректер қауіпсіздігі толық қамтамасыз етіледі.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<section class="platonus-section section" id="platonus">
+  <div class="platonus-inner">
+    <div>
+      <div class="section-eyebrow">Platonus жүйесі</div>
+      <h2 class="section-title">Қазақстанның #1 білім платформасы</h2>
+      <p class="section-desc">Platonus — отандық колледждер мен университеттер кеңінен қолданатын, оқу үдерісін толық автоматтандыратын платформа.</p>
+      <div class="platonus-chips">
+        <span class="chip">Оқу жоспары</span>
+        <span class="chip">Кесте</span>
+        <span class="chip">Бағалау</span>
+        <span class="chip">Есеп беру</span>
+        <span class="chip">Хабарламалар</span>
+        <span class="chip">Статистика</span>
+      </div>
+    </div>
+    <div class="platonus-screen">
+      <div class="ps-bar">
+        <span class="ps-dot ps-d1"></span>
+        <span class="ps-dot ps-d2"></span>
+        <span class="ps-dot ps-d3"></span>
+        <span class="ps-url">platonus.kz</span>
+      </div>
+      <div class="ps-body">
+        <div class="ps-row">
+          <div class="ps-avatar">АС</div>
+          <div class="ps-info">
+            <div class="ps-name">Асқар Серіков</div>
+            <div class="ps-detail">Математика • 2-топ</div>
+          </div>
+          <span class="ps-score">4.8</span>
+        </div>
+        <div class="ps-row">
+          <div class="ps-avatar" style="background:linear-gradient(135deg,#7c3aed,#a78bfa)">ДМ</div>
+          <div class="ps-info">
+            <div class="ps-name">Дина Мұратова</div>
+            <div class="ps-detail">Информатика • 3-топ</div>
+          </div>
+          <span class="ps-score">5.0</span>
+        </div>
+        <div class="ps-row">
+          <div class="ps-avatar" style="background:linear-gradient(135deg,#c8973f,#fbbf24)">БН</div>
+          <div class="ps-info">
+            <div class="ps-name">Берік Нұрланов</div>
+            <div class="ps-detail">Физика • 1-топ</div>
+          </div>
+          <span class="ps-score">4.5</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+  <div class="footer-inner">
+    <a href="#" class="footer-brand">
+      <div class="footer-brand-mark">AH</div>
+      <div>
+        <div class="footer-brand-name">AHGK</div>
+        <div class="footer-brand-sub">Колледждің ақпараттық ортасы</div>
+      </div>
+    </a>
+    <div class="footer-links">
+      <a href="#aniktama">Анықтама</a>
+      <a href="#negizgi">Модульдер</a>
+      <a href="#tech">Технология</a>
+      <a href="#paydasy">Пайдасы</a>
+      <a href="#platonus">Platonus</a>
+    </div>
+  </div>
+  <p class="footer-copy">© 2025 AHGK — Колледждің Ақпараттық Білім Беру Ортасы</p>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+<script>
+/* ═══════════════════════════════════════════════
+   AHGK — anime.js Animation System
+═══════════════════════════════════════════════ */
+
+// ── 0. PAGE LOAD OVERLAY ──
+const overlay = document.createElement('div');
+overlay.style.cssText = `
+  position:fixed;inset:0;z-index:9999;background:#0b0d11;
+  display:flex;align-items:center;justify-content:center;pointer-events:none;
+`;
+overlay.innerHTML = `
+  <div id="loader-inner" style="text-align:center">
+    <div id="loader-logo" style="font-family:'DM Serif Display',serif;font-size:3rem;color:#fff;opacity:0;letter-spacing:-2px">AH<em style="color:#23a898;font-style:italic">GK</em></div>
+    <div id="loader-bar" style="margin-top:20px;height:2px;width:200px;background:rgba(255,255,255,0.1);border-radius:2px;overflow:hidden">
+      <div id="loader-fill" style="height:100%;width:0%;background:linear-gradient(90deg,#1a7a6e,#23a898);border-radius:2px"></div>
+    </div>
+  </div>`;
+document.body.appendChild(overlay);
+
+// Prevent scroll during load
+document.body.style.overflow = 'hidden';
+
+const loaderTL = anime.timeline({ easing: 'easeOutExpo' });
+loaderTL
+  .add({ targets: '#loader-logo', opacity: [0,1], translateY: [20,0], duration: 600 })
+  .add({ targets: '#loader-fill', width: ['0%','100%'], duration: 900, easing: 'easeInOutQuart' }, '-=200')
+  .add({ targets: overlay, opacity: [1,0], duration: 500, complete: () => {
+    overlay.remove();
+    document.body.style.overflow = '';
+    bootAnimations();
+  }});
+
+
+// ── 1. BOOT — hero entrance after overlay ──
+function bootAnimations() {
+
+  // Nav drop
+  anime({ targets: 'nav', translateY: [-68, 0], opacity: [0,1], duration: 700, easing: 'easeOutExpo' });
+
+  // Hero badge
+  anime({ targets: '.hero-badge', opacity: [0,1], translateY: [16,0], filter: ['blur(6px)','blur(0px)'], duration: 800, delay: 100, easing: 'easeOutExpo' });
+
+  // Hero H1 — letter by letter split
+  const h1 = document.querySelector('.hero h1');
+  if (h1) {
+    const text = h1.innerHTML;
+    // Wrap each word
+    h1.innerHTML = text.replace(/<[^>]+>|[^ ]+/g, m => {
+      if (m.startsWith('<')) return m;
+      return `<span class="word" style="display:inline-block;overflow:hidden"><span class="word-inner" style="display:inline-block">${m}</span></span> `;
+    });
+    anime({
+      targets: '.hero h1 .word-inner',
+      translateY: ['100%', 0],
+      opacity: [0, 1],
+      duration: 700,
+      delay: anime.stagger(80, { start: 200 }),
+      easing: 'easeOutExpo'
+    });
+  }
+
+  // Hero desc + actions
+  anime({
+    targets: ['.hero-desc', '.hero-actions'],
+    opacity: [0,1],
+    translateY: [24, 0],
+    duration: 800,
+    delay: anime.stagger(150, { start: 500 }),
+    easing: 'easeOutExpo'
+  });
+
+  // Dashboard card
+  anime({
+    targets: '.hero-visual',
+    opacity: [0,1],
+    translateX: [60,0],
+    scale: [0.95, 1],
+    duration: 1000,
+    delay: 300,
+    easing: 'easeOutExpo'
+  });
+
+  // Dash rows stagger in
+  anime({
+    targets: '.dash-row',
+    opacity: [0,1],
+    translateX: [30,0],
+    duration: 600,
+    delay: anime.stagger(100, { start: 700 }),
+    easing: 'easeOutBack'
+  });
+
+  // Dash stats pop
+  anime({
+    targets: '.dash-stat',
+    scale: [0.5, 1],
+    opacity: [0, 1],
+    duration: 500,
+    delay: anime.stagger(80, { start: 400 }),
+    easing: 'easeOutBack'
+  });
+
+  // Stats bar row
+  anime({
+    targets: '.stat-cell',
+    opacity: [0,1],
+    translateY: [40,0],
+    duration: 700,
+    delay: anime.stagger(100, { start: 600 }),
+    easing: 'easeOutExpo'
+  });
+
+  // Counter animation for stats bar
+  document.querySelectorAll('.stat-num[data-val]').forEach(el => {
+    const target = parseFloat(el.dataset.val);
+    const suffix = el.dataset.suffix || '';
+    const isDecimal = !Number.isInteger(target);
+    const obj = { val: 0 };
+    anime({
+      targets: obj,
+      val: target,
+      duration: 1800,
+      delay: 700,
+      easing: 'easeOutExpo',
+      update: () => {
+        el.textContent = isDecimal ? obj.val.toFixed(1) + suffix : Math.floor(obj.val) + suffix;
+      },
+      complete: () => {
+        el.textContent = (isDecimal ? target.toFixed(1) : target) + suffix;
+      }
+    });
+  });
+
+  // Divider draw left→right
+  anime({
+    targets: '.divider',
+    scaleX: [0,1],
+    opacity: [0,1],
+    duration: 1200,
+    delay: 800,
+    easing: 'easeInOutQuart',
+    transformOrigin: 'left center'
+  });
+}
+
+
+// ── 2. SCROLL REVEAL ──
+const observed = new Set();
+
+function onScroll() {
+  document.querySelectorAll('.section:not(.anim-done), .bento-card:not(.anim-done), .def-card:not(.anim-done), .benefit-card:not(.anim-done), .tech-big:not(.anim-done), .tech-small:not(.anim-done), .ps-row:not(.anim-done), .chip:not(.anim-done), .platonus-inner > div:not(.anim-done)').forEach(el => {
+    const rect = el.getBoundingClientRect();
+    if (rect.top < window.innerHeight - 60) {
+      el.classList.add('anim-done');
+      triggerReveal(el);
+    }
+  });
+}
+
+function triggerReveal(el) {
+  if (el.classList.contains('section')) {
+    el.classList.add('visible');
+
+    // Section eyebrow + title + desc
+    anime({
+      targets: el.querySelectorAll('.section-eyebrow, .section-title, .section-desc'),
+      opacity: [0,1],
+      translateY: [30,0],
+      duration: 700,
+      delay: anime.stagger(100),
+      easing: 'easeOutExpo'
+    });
+
+    // Platonus inner divs
+    const innerDivs = el.querySelectorAll('.platonus-inner > div');
+    if (innerDivs.length) {
+      anime({
+        targets: innerDivs,
+        opacity: [0,1],
+        translateY: [40,0],
+        duration: 800,
+        delay: anime.stagger(200, { start: 200 }),
+        easing: 'easeOutExpo'
+      });
+    }
+
+    // Chips inside platonus
+    const chips = el.querySelectorAll('.chip');
+    if (chips.length) {
+      anime({
+        targets: chips,
+        opacity: [0,1],
+        scale: [0.7,1],
+        duration: 400,
+        delay: anime.stagger(60, { start: 500 }),
+        easing: 'easeOutBack'
+      });
+    }
+
+    return;
+  }
+
+  if (el.classList.contains('def-card')) {
+    const idx = [...el.parentElement.children].indexOf(el);
+    anime({
+      targets: el,
+      opacity: [0,1],
+      translateY: [50,0],
+      scale: [0.93,1],
+      duration: 700,
+      delay: idx * 120,
+      easing: 'easeOutExpo'
+    });
+    return;
+  }
+
+  if (el.classList.contains('bento-card')) {
+    const idx = [...el.parentElement.children].indexOf(el);
+    anime({
+      targets: el,
+      opacity: [0,1],
+      translateY: [60,0],
+      rotateX: [8,0],
+      duration: 800,
+      delay: idx * 150,
+      easing: 'easeOutExpo'
+    });
+    return;
+  }
+
+  if (el.classList.contains('benefit-card')) {
+    const idx = [...el.parentElement.children].indexOf(el);
+    anime({
+      targets: el,
+      opacity: [0,1],
+      scale: [0.88,1],
+      translateY: [20,0],
+      duration: 600,
+      delay: idx * 80,
+      easing: 'easeOutBack'
+    });
+    return;
+  }
+
+  if (el.classList.contains('tech-big')) {
+    anime({
+      targets: el,
+      opacity: [0,1],
+      translateX: [-50,0],
+      duration: 900,
+      easing: 'easeOutExpo'
+    });
+    return;
+  }
+
+  if (el.classList.contains('tech-small')) {
+    const idx = [...el.parentElement.children].indexOf(el);
+    anime({
+      targets: el,
+      opacity: [0,1],
+      translateX: [50,0],
+      duration: 700,
+      delay: idx * 150,
+      easing: 'easeOutExpo'
+    });
+    return;
+  }
+
+  if (el.classList.contains('ps-row')) {
+    const idx = [...el.parentElement.children].indexOf(el);
+    anime({
+      targets: el,
+      opacity: [0,1],
+      translateX: [40,0],
+      duration: 600,
+      delay: idx * 120,
+      easing: 'easeOutExpo'
+    });
+    return;
+  }
+
+  if (el.classList.contains('chip')) {
+    const idx = [...el.parentElement.children].indexOf(el);
+    anime({
+      targets: el,
+      opacity: [0,1],
+      scale: [0.7,1],
+      duration: 400,
+      delay: idx * 60,
+      easing: 'easeOutBack'
+    });
+    return;
+  }
+
+}
+
+window.addEventListener('scroll', onScroll, { passive: true });
+setTimeout(onScroll, 100);
+
+
+// ── 3. HOVER MICRO-INTERACTIONS ──
+
+// Card 3D tilt
+document.querySelectorAll('.def-card, .bento-card, .tech-small, .benefit-card').forEach(card => {
+  card.addEventListener('mousemove', e => {
+    const r = card.getBoundingClientRect();
+    const x = (e.clientX - r.left - r.width  / 2) / (r.width  / 2);
+    const y = (e.clientY - r.top  - r.height / 2) / (r.height / 2);
+    anime({
+      targets: card,
+      rotateY: x * 6,
+      rotateX: -y * 6,
+      translateZ: 20,
+      duration: 200,
+      easing: 'linear'
+    });
+  });
+  card.addEventListener('mouseleave', () => {
+    anime({
+      targets: card,
+      rotateY: 0, rotateX: 0, translateZ: 0,
+      duration: 600,
+      easing: 'easeOutElastic(1, 0.5)'
+    });
+  });
+});
+
+// Dashboard card tilt
+document.querySelectorAll('.dashboard-card').forEach(card => {
+  card.addEventListener('mousemove', e => {
+    const r = card.getBoundingClientRect();
+    const x = (e.clientX - r.left - r.width  / 2) / (r.width  / 2);
+    const y = (e.clientY - r.top  - r.height / 2) / (r.height / 2);
+    anime({ targets: card, rotateY: x * 5, rotateX: -y * 5, scale: 1.01, duration: 200, easing: 'linear' });
+  });
+  card.addEventListener('mouseleave', () => {
+    anime({ targets: card, rotateY: 0, rotateX: 0, scale: 1, duration: 700, easing: 'easeOutElastic(1, 0.5)' });
+  });
+});
+
+// Nav links bounce on hover
+document.querySelectorAll('.nav-links a').forEach(a => {
+  a.addEventListener('mouseenter', () => {
+    anime({ targets: a, translateY: [-2, 0], duration: 300, easing: 'easeOutBounce' });
+  });
+});
+
+// Button press effect
+document.querySelectorAll('.btn-primary, .btn-secondary').forEach(btn => {
+  btn.addEventListener('mousedown', () => {
+    anime({ targets: btn, scale: 0.95, duration: 100, easing: 'easeOutQuad' });
+  });
+  btn.addEventListener('mouseup', () => {
+    anime({ targets: btn, scale: 1, duration: 400, easing: 'easeOutElastic(1, 0.5)' });
+  });
+});
+
+// Task list items pop on hover
+document.querySelectorAll('.task-list li').forEach(li => {
+  li.addEventListener('mouseenter', () => {
+    anime({ targets: li, translateX: [0, 6], duration: 250, easing: 'easeOutQuad' });
+  });
+  li.addEventListener('mouseleave', () => {
+    anime({ targets: li, translateX: 0, duration: 350, easing: 'easeOutElastic(1, 0.6)' });
+  });
+});
+
+// Stat cells shine on hover
+document.querySelectorAll('.stat-cell').forEach(cell => {
+  cell.addEventListener('mouseenter', () => {
+    anime({ targets: cell.querySelector('.stat-num'), scale: [1, 1.08], duration: 300, easing: 'easeOutBack' });
+  });
+  cell.addEventListener('mouseleave', () => {
+    anime({ targets: cell.querySelector('.stat-num'), scale: 1, duration: 400, easing: 'easeOutElastic(1, 0.5)' });
+  });
+});
+
+
+// ── 4. HERO AMBIENT GLOW ──
+const heroEl = document.querySelector('.hero');
+if (heroEl) {
+  heroEl.addEventListener('mousemove', e => {
+    const rect = heroEl.getBoundingClientRect();
+    const x = ((e.clientX - rect.left) / rect.width) * 100;
+    const y = ((e.clientY - rect.top)  / rect.height) * 100;
+    heroEl.style.setProperty('--mx', x + '%');
+    heroEl.style.setProperty('--my', y + '%');
+  });
+}
+
+
+// ── 5. FLOATING PARTICLES ──
+const canvas = document.createElement('canvas');
+canvas.style.cssText = 'position:fixed;inset:0;pointer-events:none;z-index:0;opacity:0.4';
+document.body.appendChild(canvas);
+const ctx = canvas.getContext('2d');
+
+function resizeCanvas() {
+  canvas.width  = window.innerWidth;
+  canvas.height = window.innerHeight;
+}
+resizeCanvas();
+window.addEventListener('resize', resizeCanvas);
+
+const particles = Array.from({ length: 28 }, () => ({
+  x: Math.random() * window.innerWidth,
+  y: Math.random() * window.innerHeight,
+  r: Math.random() * 2 + 0.5,
+  vx: (Math.random() - 0.5) * 0.3,
+  vy: (Math.random() - 0.5) * 0.3,
+  alpha: Math.random() * 0.4 + 0.1
+}));
+
+function drawParticles() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  particles.forEach(p => {
+    p.x += p.vx; p.y += p.vy;
+    if (p.x < 0) p.x = canvas.width;
+    if (p.x > canvas.width) p.x = 0;
+    if (p.y < 0) p.y = canvas.height;
+    if (p.y > canvas.height) p.y = 0;
+    ctx.beginPath();
+    ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+    ctx.fillStyle = `rgba(26,122,110,${p.alpha})`;
+    ctx.fill();
+  });
+  requestAnimationFrame(drawParticles);
+}
+drawParticles();
+
+
+// ── 6. SMOOTH SCROLL ──
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    const id = a.getAttribute('href').slice(1);
+    const target = document.getElementById(id);
+    if (!target) return;
+    e.preventDefault();
+    anime({
+      targets: document.documentElement,
+      scrollTop: target.offsetTop - 68,
+      duration: 900,
+      easing: 'easeInOutQuart'
+    });
+  });
+});
+
+
+// ── 7. NAV ACTIVE ──
+const allSections = document.querySelectorAll('section[id]');
+const navAnchors  = document.querySelectorAll('.nav-links a');
+
+const navObs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      navAnchors.forEach(a => a.classList.remove('nav-active'));
+      const a = document.querySelector(`.nav-links a[href="#${e.target.id}"]`);
+      if (a) {
+        a.classList.add('nav-active');
+        anime({ targets: a, scale: [0.9, 1], duration: 300, easing: 'easeOutBack' });
+      }
+    }
+  });
+}, { threshold: 0.4 });
+
+allSections.forEach(s => navObs.observe(s));
+
+
+// ── DOT BUTTON INTERACTIONS ──
+const dashCard = document.querySelector('.dashboard-card');
+const dots = document.querySelectorAll('.dash-dot');
+
+// Red — shake & hide
+dots[0]?.addEventListener('click', () => {
+  anime({
+    targets: '.dashboard-card',
+    translateX: [0, -10, 10, -8, 8, -4, 4, 0],
+    duration: 500,
+    easing: 'easeInOutQuad'
+  });
+  anime({
+    targets: '.dash-dot:nth-child(1)',
+    scale: [1, 0.7, 1],
+    duration: 300,
+    easing: 'easeOutBack'
+  });
+});
+
+// Yellow — minimize (squish)
+dots[1]?.addEventListener('click', () => {
+  anime({
+    targets: '.dashboard-card',
+    scaleY: [1, 0.03],
+    translateY: [0, 40],
+    duration: 350,
+    easing: 'easeInExpo',
+    complete: () => {
+      anime({
+        targets: '.dashboard-card',
+        scaleY: 1,
+        translateY: 0,
+        duration: 500,
+        delay: 600,
+        easing: 'easeOutElastic(1, 0.6)'
+      });
+    }
+  });
+});
+
+// Green — fullscreen flash
+dots[2]?.addEventListener('click', () => {
+  const flash = document.createElement('div');
+  flash.style.cssText = 'position:fixed;inset:0;z-index:9998;background:#0b0d11;pointer-events:none;';
+  document.body.appendChild(flash);
+  anime({
+    targets: '.dashboard-card',
+    scale: [1, 1.04, 1],
+    duration: 500,
+    easing: 'easeOutBack'
+  });
+  anime({
+    targets: flash,
+    opacity: [0, 0.5, 0],
+    duration: 600,
+    easing: 'easeInOutQuad',
+    complete: () => flash.remove()
+  });
+});
+const psObs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (!e.isIntersecting) return;
+    psObs.unobserve(e.target);
+    e.target.querySelectorAll('.ps-score').forEach((el, i) => {
+      const target = parseFloat(el.textContent);
+      const obj = { val: 0 };
+      anime({
+        targets: obj,
+        val: target,
+        duration: 1200,
+        delay: i * 200,
+        easing: 'easeOutExpo',
+        update: () => el.textContent = obj.val.toFixed(1),
+        complete: () => el.textContent = target.toFixed(1)
+      });
+    });
+  });
+}, { threshold: 0.5 });
+
+const psScreen = document.querySelector('.platonus-screen');
+if (psScreen) psObs.observe(psScreen);
+
+</script>
+</body>
+</html>
